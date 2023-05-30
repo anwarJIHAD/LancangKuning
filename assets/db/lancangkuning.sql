@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2023 at 10:23 AM
+-- Generation Time: May 30, 2023 at 12:13 PM
 -- Server version: 10.4.24-MariaDB
--- PHP Version: 8.0.19
+-- PHP Version: 8.1.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,28 +31,65 @@ CREATE TABLE `detail_ilegal` (
   `id_detail` int(11) NOT NULL,
   `no_korban` varchar(20) NOT NULL,
   `id_pelaku` int(11) NOT NULL,
-  `id_pendukung` int(11) NOT NULL
+  `id_pendukung` int(11) NOT NULL,
+  `kronologi_Pencegahan` varchar(500) NOT NULL,
+  `instansi_penindaklanjut` varchar(255) NOT NULL,
+  `tgl_pelaksanaan` date DEFAULT NULL,
+  `TKP` varchar(255) NOT NULL,
+  `lokasi_shelter` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `detail_ilegal`
 --
 
-INSERT INTO `detail_ilegal` (`id_detail`, `no_korban`, `id_pelaku`, `id_pendukung`) VALUES
-(14, 'P', 3, 1),
-(15, 'PPPP', 5, 17),
-(16, 'PL1676173107', 6, 1),
-(26, 'KR1676176929', 9, 18),
-(27, 'KR1676176929', 10, 18),
-(36, 'KR1676213531', 21, 24),
-(38, 'KR1678335246', 25, 26),
-(39, 'KR1678335273', 25, 26),
-(43, 'KR1678469650', 27, 28),
-(44, 'KR1678469650', 28, 28),
-(47, 'KR1678503615', 29, 2),
-(48, 'KR1678503615', 30, 2),
-(49, 'KR1678503889', 31, 1),
-(50, 'KR1678590088', 31, 1);
+INSERT INTO `detail_ilegal` (`id_detail`, `no_korban`, `id_pelaku`, `id_pendukung`, `kronologi_Pencegahan`, `instansi_penindaklanjut`, `tgl_pelaksanaan`, `TKP`, `lokasi_shelter`) VALUES
+(67, 'KR1685007639', 41, 38, 'ada', 'ads', NULL, '', '0'),
+(68, 'KR1685007842', 40, 39, 'dia memata matain saya tapi sayangnya saya tidak percaya haha haha haha', 'polsekk semporr', NULL, '', '0'),
+(69, 'KR1685007842', 42, 39, 'dia memata matain saya tapi sayangnya saya tidak percaya haha haha haha', 'polsekk semporr', NULL, '', '0'),
+(70, 'KR1685007842', 43, 39, 'dia memata matain saya tapi sayangnya saya tidak percaya haha haha haha', 'polsekk semporr', NULL, '', '0'),
+(71, 'KR1685008078', 41, 38, 'asda', 'adssa', NULL, '', '0'),
+(72, 'KR1685064939', 40, 39, 'sangat jahat', 'polsek dumai', NULL, '', '0'),
+(73, 'KR1685064939', 41, 39, 'sangat jahat', 'polsek dumai', NULL, '', '0'),
+(74, 'KR1685069756', 42, 39, 'MUDHA ', 'polsek jombang', '2023-05-24', 'indrapura', '0'),
+(75, 'KR1685073049', 47, 40, 'semua berjalan dengan baik', 'polsekk semporr', '2023-05-24', 'jalan kartika sari', '0'),
+(76, 'KR1685073049', 48, 40, 'semua berjalan dengan baik', 'polsekk semporr', '2023-05-24', 'jalan kartika sari', '0'),
+(77, 'KR1685073308', 46, 40, 'asad', 'polsekk semporr', '2023-05-17', 'bangko', '0'),
+(78, 'KR1685073308', 47, 40, 'asad', 'polsekk semporr', '2023-05-17', 'bangko', '0'),
+(79, 'KR1685073671', 40, 40, 'kjhk', 'polsekk semporr', '2023-05-11', 'asdas', '0'),
+(80, 'KR1685073671', 42, 40, 'kjhk', 'polsekk semporr', '2023-05-11', 'asdas', '0'),
+(81, 'KR1685082282', 49, 38, 'asdas', 'asdas', '2023-05-23', 'adsaas', '0'),
+(82, 'KR1685082282', 50, 38, 'asdas', 'asdas', '2023-05-23', 'adsaas', '0'),
+(83, 'KR1685086836', 41, 39, 'asas', 'asda', '2023-05-22', 'asdas', '0'),
+(84, 'KR1685086836', 43, 39, 'asas', 'asda', '2023-05-22', 'asdas', '0'),
+(85, 'KR1685094053', 42, 39, 'asda', 'asdas', '2023-05-30', 'asdsa', '0');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kasus`
+--
+
+CREATE TABLE `kasus` (
+  `id_kasus` int(11) NOT NULL,
+  `tgl_pengaduan` date NOT NULL,
+  `nama_pmi` varchar(255) NOT NULL,
+  `no_paspor` varchar(255) NOT NULL,
+  `alamat` varchar(255) NOT NULL,
+  `negara_penempatan` varchar(255) NOT NULL,
+  `jenis_kasus` varchar(255) NOT NULL,
+  `p3mi` varchar(255) NOT NULL,
+  `uraian_kasus` varchar(255) NOT NULL,
+  `penyelesaian` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kasus`
+--
+
+INSERT INTO `kasus` (`id_kasus`, `tgl_pengaduan`, `nama_pmi`, `no_paspor`, `alamat`, `negara_penempatan`, `jenis_kasus`, `p3mi`, `uraian_kasus`, `penyelesaian`, `keterangan`) VALUES
+(1, '2023-05-25', 'anwar1', 'sdf231', 'bangko kanan11', 'indrapura11', 'sakit1', 'ia lah tu1', 'entah engga tau1', 'sudah di eksekusi1', 'masih hidup orang nya1');
 
 -- --------------------------------------------------------
 
@@ -72,13 +109,11 @@ CREATE TABLE `pangkat` (
 --
 
 INSERT INTO `pangkat` (`id`, `NIP`, `keterangan`, `file`) VALUES
-(8, '11111111', 'android_valorant1.pdf', 'android_valorant2.pdf'),
-(9, '11111111', 'android_valorant3.pdf', 'android_valorant4.pdf'),
-(10, '1234', 'MhdAnwar-AKJK-CSE-20TIC-2-certificate.pdf', 'MhdAnwar-AKJK-COA-20TIC-2-certificate.pdf'),
-(12, '1212', 'berkas photo', 'adafsdfasasd'),
-(13, '1212', 'asdassdas', ''),
-(14, '1212', 'berkas ke 3', ''),
-(15, '1212', 'berkas 4', 'pdf_(1).pdf');
+(19, '1212', 'pdfaSaaeasa', 'Data_Siswa1.xlsx'),
+(20, '1212', 'segera di kirim ya', ''),
+(23, '87654321', 'photo profile', 'IMG_0059_(1).PNG'),
+(24, '987654321', 'sk', 'logo.png'),
+(25, '87654321', 'barang bekas', 'logo1.png');
 
 -- --------------------------------------------------------
 
@@ -88,46 +123,55 @@ INSERT INTO `pangkat` (`id`, `NIP`, `keterangan`, `file`) VALUES
 
 CREATE TABLE `pelaku` (
   `id_pelaku` int(11) NOT NULL,
-  `id_pendukung` int(11) NOT NULL,
   `nama_pelaku` varchar(255) NOT NULL,
   `peran` varchar(255) NOT NULL,
   `asal_daerah` varchar(255) NOT NULL,
-  `pelaku` varchar(20) NOT NULL
+  `keterangan` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pelaku`
 --
 
-INSERT INTO `pelaku` (`id_pelaku`, `id_pendukung`, `nama_pelaku`, `peran`, `asal_daerah`, `pelaku`) VALUES
-(3, 17, 'andi', 'utama', 'bangko', ''),
-(4, 16, 'id_16', 'mata mata', 'bangko bang ardi', ''),
-(5, 17, 'Anwor', 'HH', 'HH', ''),
-(6, 17, 'wOr', 'rr', 'rr', ''),
-(7, 17, 'joi', 'perantara', 'pekanbaru', ''),
-(8, 17, 'asas', 'asda', 'adas', ''),
-(9, 18, 'j', 'sdfsd', 'sdfsd', ''),
-(10, 18, 'Anwor', 'cvbc', 'xcvxc', ''),
-(11, 19, 'ardi', 'penculik', 'bandung', ''),
-(12, 19, 'indri', 'pemantau', 'rokan', ''),
-(13, 20, 'anwar', 'mata mata', 'bandung', ''),
-(14, 20, 'joko', 'pembunuh', 'cikarang', ''),
-(15, 21, 'anwar', 'petugas', 'indramayu', ''),
-(16, 21, 'indro', 'pembunuh', 'indonesia', ''),
-(17, 22, 'asd', 'asda', 'asd', ''),
-(18, 22, 'asd', 'asda', 'as', ''),
-(19, 23, 'asdsa', 'asda', 'asd', ''),
-(20, 23, 'wee', 'wew', 'as', ''),
-(21, 24, 'delau', 'fgd_', 'wq_', ''),
-(22, 24, 'Anwor_9', 'sdfs_', 'sfdds_)_&', ''),
-(23, 24, 'as', 'mata mata', 'duri', ''),
-(24, 25, 'budi', 'penculik', 'bagan', ''),
-(25, 26, 'anggi', 'asa', 'bangko', ''),
-(27, 28, 'Anwor', 'asa', 'asda', ''),
-(28, 28, 'asa', 'asda', 'asda', ''),
-(29, 2, 'Anwor', 'asdas', 'asd', ''),
-(30, 2, 'fgf', 'fgf', 'fgf', ''),
-(31, 1, 'Anwor', 'dfd', 'dfgd', '');
+INSERT INTO `pelaku` (`id_pelaku`, `nama_pelaku`, `peran`, `asal_daerah`, `keterangan`) VALUES
+(40, 'anwar', '', '', ''),
+(41, 'anwar', '', '', ''),
+(42, 'indra', '', '', ''),
+(43, 'yogaasa', '', '', ''),
+(44, 'andi', 'penculik', '', ''),
+(45, 'bagas', 'mata mata', '', ''),
+(46, 'asda', 'adsa', '', ''),
+(47, 'ardi', 'mata mata', '', ''),
+(48, 'indra ', 'mata mata', '', ''),
+(49, 'koko1', 'mata mata', '', ''),
+(50, 'koko2', 'mata mata', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pkln`
+--
+
+CREATE TABLE `pkln` (
+  `id_pkln` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `jenis_kelamin` varchar(255) NOT NULL,
+  `usia` int(11) NOT NULL,
+  `daerah_asal` varchar(255) NOT NULL,
+  `pendidikan` varchar(255) NOT NULL,
+  `negara_tujuan` varchar(255) NOT NULL,
+  `sektor_pekerjaan` varchar(255) NOT NULL,
+  `no_kontak` int(20) NOT NULL,
+  `informasi` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pkln`
+--
+
+INSERT INTO `pkln` (`id_pkln`, `nama`, `jenis_kelamin`, `usia`, `daerah_asal`, `pendidikan`, `negara_tujuan`, `sektor_pekerjaan`, `no_kontak`, `informasi`, `keterangan`) VALUES
+(2, 'anwar', 'laki-laki', 12, 'pekanbaru', 's1', 'malaysia', 'industri', 23224, 'mati', 'ia ya');
 
 -- --------------------------------------------------------
 
@@ -157,8 +201,8 @@ CREATE TABLE `pmi` (
 INSERT INTO `pmi` (`id_pmi`, `nama`, `jenis_kelamin`, `tanggal_lahir`, `negara_penempatan`, `tgl_datang`, `jenis_pulang`, `alamat`, `provinsi`, `debarkas`, `ket`, `file`) VALUES
 (6, 'anwar2', 'laki-laki', '2023-02-08', 'melaysia', '2023-02-08', 'PMI TerkendalaEE', 'asa', 'riau', 'dumai', '2266', ''),
 (7, 'anwar', 'laki-laki', '2023-03-08', 'indonesia', '2023-03-15', 'PMI Terkendala', 'bangko', 'riau', 'dumai', 'sakit', ''),
-(8, 'delau', 'laki-laki', '2023-03-23', 'malaysia', '2023-03-22', 'Pencegahan Penempatan ilegal', 'pekanbaru', 'jabar', 'dumai', 'sudah selesai', ''),
-(9, 'boby', 'laki-laki', '2023-03-15', 'melaysia', '2023-03-07', 'jenazah', 'asa', 'riau', 'dumai', 'dibu', '');
+(8, 'delau', 'laki-laki', '2023-03-23', 'malaysia', '2023-03-22', 'Pencegahan Penempatan ilegal', 'pekanbaru', 'jabar', 'dumai', 'asadadas', ''),
+(10, 'budi', 'laki-laki', '2023-05-17', 'malaysia', '2023-05-16', 'desportasi', 'ada', 'riau', 'dumai', 'masih hidup', '');
 
 -- --------------------------------------------------------
 
@@ -170,25 +214,31 @@ CREATE TABLE `pmi_ilegal` (
   `id_ilegal` int(11) NOT NULL,
   `id_pendukung` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `no_paspor` varchar(50) NOT NULL,
-  `no_ktp` int(50) NOT NULL,
-  `Daerah_asal_rekrut` varchar(50) NOT NULL,
+  `daerah_asal_pmi` varchar(255) NOT NULL,
   `negara_tujuan` varchar(50) NOT NULL,
-  `no_korban` varchar(20) NOT NULL
+  `no_korban` varchar(20) NOT NULL,
+  `instansi_penindaklanjut` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pmi_ilegal`
 --
 
-INSERT INTO `pmi_ilegal` (`id_ilegal`, `id_pendukung`, `nama`, `no_paspor`, `no_ktp`, `Daerah_asal_rekrut`, `negara_tujuan`, `no_korban`) VALUES
-(22, 24, 'anwar-', 'bbbbb-', 121211, 'rohil_', 'inggris_', 'KR1676213531'),
-(23, 26, 'anwar', '234242', 23423, 'dumai', 'indonesi', 'KR1678335246'),
-(24, 26, 'adsa', '234234', 2324, 'medan', 'indonesia', 'KR1678335273'),
-(28, 28, 'dedi__', 'd34reg', 121211, 'rohil', 'inggris', 'KR1678469650'),
-(30, 2, 'anwar', 'c888', 121211, 'dss', 'inggris', 'KR1678503615'),
-(31, 1, 'anwar', 'dfgfdre', 333, '33453', 'fhgfh', 'KR1678503889'),
-(32, 1, 'fajar', 'bbbbb-', 2323, 'bangko', 'indonesia', 'KR1678590088');
+INSERT INTO `pmi_ilegal` (`id_ilegal`, `id_pendukung`, `nama`, `daerah_asal_pmi`, `negara_tujuan`, `no_korban`, `instansi_penindaklanjut`) VALUES
+(43, 39, 'anwar', 'bangko', 'malaysia', '', ''),
+(44, 39, 'korban1', 'bangko', 'israil', '', ''),
+(45, 38, 'anwar', 'bangko', 'asdsa', 'KR1685007639', ''),
+(46, 39, 'andri', 'indramayu', 'malaysia', 'KR1685007842', ''),
+(47, 38, 'asd', 'adsa', 'adsa', 'KR1685008078', ''),
+(48, 39, 'jumaidi', 'banten', 'irlandia', 'KR1685064939', ''),
+(49, 39, 'anwar', 'das', 'asdas', 'KR1685069756', ''),
+(50, 40, 'korban1', 'bangko', 'indonesia', 'KR1685073049', ''),
+(51, 40, 'korban1', 'bangko', 'adas', 'KR1685073308', ''),
+(52, 40, 'adas', 'asdas', 'asdas', 'KR1685073671', ''),
+(53, 38, 'werw', 'werw', 'werew', 'KR1685082282', ''),
+(54, 39, 'asda', 'asdas', 'asd', 'KR1685086836', ''),
+(55, 39, 'adas', 'asda', 'asdas', 'KR1685086836', ''),
+(56, 39, 'asd', 'asda', 'asd', 'KR1685094053', '');
 
 -- --------------------------------------------------------
 
@@ -198,38 +248,51 @@ INSERT INTO `pmi_ilegal` (`id_ilegal`, `id_pendukung`, `nama`, `no_paspor`, `no_
 
 CREATE TABLE `pmi_pendukung` (
   `id_pendukung` int(11) NOT NULL,
-  `pelaksana` varchar(255) NOT NULL,
+  `nama_pelaksana` varchar(255) NOT NULL,
   `tgl_pelaksana` date NOT NULL,
   `TKP` varchar(255) NOT NULL,
-  `lokasi_shelter` varchar(255) NOT NULL,
-  `instansi_penindaklanjut` varchar(255) NOT NULL,
-  `keterangan` varchar(1000) NOT NULL
+  `lokasi_shelter` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `pmi_pendukung`
 --
 
-INSERT INTO `pmi_pendukung` (`id_pendukung`, `pelaksana`, `tgl_pelaksana`, `TKP`, `lokasi_shelter`, `instansi_penindaklanjut`, `keterangan`) VALUES
-(1, 'pelaksana pertama', '2017-01-12', 'Sungai Senteng Parit Gantung Desa Kedabu Rapat Kec. Rangsang Pesisir Kab.  Meranti Provinsi Riau', 'BP3MI Riau', 'Polres Meranti', 'Terdakwa divonis 1 tahun penjara'),
-(2, 'Polres Dumai', '2018-01-17', 'Penginapan Kurnia Jl. Pepaya Kel. Rimba Sekampung Kota Dumai ', 'P4MI Kota Dumai / BP3MI Riau', 'Polres Dumai ', 'Terdakwa I dan II divonis 1 Tahun 4 bulan penjara dan denda 1 M (1 bulan penjara). Terdakwa III divonis 1 tahun 6 bulan penjara dan denda 1 M (2 bulan penjara)'),
-(3, 'polsek dumai', '2023-02-15', 'bangko', 'dumai', '', ''),
-(12, 'asdas', '2023-02-18', 'asda', 'asdas', '', ''),
-(13, 'rr', '2023-02-05', 'bangko', 'asdas', '', ''),
-(14, 'GG', '2023-02-17', 'bangko', 'asda', '', ''),
-(15, 'ardi', '2023-02-15', 'ada', 'adass', '', ''),
-(16, 'anwor res', '2023-02-14', 'bangko', 'asda', '', ''),
-(17, 'aldi', '2023-02-16', 'bandung', 'indonesia_', '', ''),
-(18, 'sassas', '2023-02-09', 'asdas', 'asda', '', ''),
-(19, 'polres batam__', '2023-02-15', 'bangko__', 'dumai__', '', ''),
-(20, 'polsek mandau', '2023-02-15', 'pekanbaru', 'rumbai__', '', ''),
-(21, 'polsek bangko', '2023-02-22', 'rumbai', 'pekanbaru_', '', ''),
-(22, 'asdas', '2023-02-21', 'sds', 'sdfs', '', ''),
-(23, 'asdas', '2023-02-08', 'bangko', 'asdas', '', ''),
-(24, 'polsek dumai', '2023-02-08', 'bangko_', 'lokasi_', '', ''),
-(25, 'polsek dumai', '2023-03-13', 'bengkalis', 'betam', '', ''),
-(26, 'bareskrim', '2023-03-14', 'batam', 'dumai', '', ''),
-(28, 'bissmillah', '2023-03-15', 'ada', 'dumai', '', '');
+INSERT INTO `pmi_pendukung` (`id_pendukung`, `nama_pelaksana`, `tgl_pelaksana`, `TKP`, `lokasi_shelter`) VALUES
+(38, '40', '2023-05-10', 'ada', 'asdas'),
+(39, 'polsek semporr', '2023-05-14', 'indrapura', 'dumai'),
+(40, 'polsek bangko pusako', '0000-00-00', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pmi_penempatan`
+--
+
+CREATE TABLE `pmi_penempatan` (
+  `nama` varchar(50) NOT NULL,
+  `jenis_kelamin` varchar(50) NOT NULL,
+  `pendidikan` varchar(255) NOT NULL,
+  `nik` int(50) NOT NULL,
+  `no_paspor` varchar(50) NOT NULL,
+  `skema` varchar(255) NOT NULL,
+  `sektor_usaha` varchar(255) NOT NULL,
+  `alamat_asal` varchar(255) NOT NULL,
+  `kabupaten` varchar(255) NOT NULL,
+  `negara_tujuan` varchar(255) NOT NULL,
+  `jabatan` varchar(255) NOT NULL,
+  `company` varchar(255) NOT NULL,
+  `no_hp` int(50) NOT NULL,
+  `proses` varchar(255) NOT NULL,
+  `id_penempatan` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pmi_penempatan`
+--
+
+INSERT INTO `pmi_penempatan` (`nama`, `jenis_kelamin`, `pendidikan`, `nik`, `no_paspor`, `skema`, `sektor_usaha`, `alamat_asal`, `kabupaten`, `negara_tujuan`, `jabatan`, `company`, `no_hp`, `proses`, `id_penempatan`) VALUES
+('as', 'laki-laki', 'asd', 22, 'c888', 'werw', 'werw', 'werw', 'werw', 'werew', 'wrwe', 'werwe', 232, 'wewr', 2);
 
 -- --------------------------------------------------------
 
@@ -242,7 +305,7 @@ CREATE TABLE `surat_keluar` (
   `NIP` varchar(255) NOT NULL,
   `no_surat` varchar(255) NOT NULL,
   `tgl_keluar` date NOT NULL,
-  `pengirim` varchar(255) NOT NULL,
+  `tujuan` varchar(255) NOT NULL,
   `perihal` varchar(255) NOT NULL,
   `surat` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -251,9 +314,9 @@ CREATE TABLE `surat_keluar` (
 -- Dumping data for table `surat_keluar`
 --
 
-INSERT INTO `surat_keluar` (`id`, `NIP`, `no_surat`, `tgl_keluar`, `pengirim`, `perihal`, `surat`) VALUES
-(1, '1234567890', '31', '0002-02-02', '2', '2', 'Latihan_Evaluasi_Edisi_Lebaran.docx'),
-(4, '11111111', '12333', '0001-01-01', '12', '21', 'android_valorant6.pdf');
+INSERT INTO `surat_keluar` (`id`, `NIP`, `no_surat`, `tgl_keluar`, `tujuan`, `perihal`, `surat`) VALUES
+(4, '11111111', '12333', '0001-01-01', '12', '21', 'android_valorant6.pdf'),
+(8, '12345678', 'asaas', '2023-05-18', 'asas', 'meninjau', 'android_valorant311.docx');
 
 -- --------------------------------------------------------
 
@@ -278,8 +341,7 @@ CREATE TABLE `surat_masuk` (
 
 INSERT INTO `surat_masuk` (`id`, `NIP`, `no_surat`, `tgl_kirim`, `tgl_terima`, `pengirim`, `perihal`, `surat`) VALUES
 (4, '1234567890', '31', '0001-03-31', '0001-03-31', '31', '31', 'Latihan_Soal_Linux1.docx'),
-(7, '11111111', '1222234', '0001-01-01', '0001-01-12', '1351', '11', 'android_valorant.docx'),
-(8, '1234', '123', '2023-03-09', '2023-03-06', 'pmi pusat', 'pmi ilegal', 'LAPORAN_BON_PKM_PCR-ROHIL_(1).pdf');
+(7, '11111111', '1222234', '0001-01-01', '0001-01-12', '1351', '11', 'android_valorant.docx');
 
 -- --------------------------------------------------------
 
@@ -299,7 +361,7 @@ CREATE TABLE `user` (
   `jabatan` varchar(255) NOT NULL,
   `no_hp` int(15) NOT NULL,
   `pendidikan_terakhir` varchar(255) NOT NULL,
-  `masa_kerja` int(255) NOT NULL,
+  `masa_kerja` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `tgl_akhir` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -309,15 +371,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`NIP`, `nama`, `password`, `gambar`, `role`, `status_pegawai`, `pangkat`, `jenis_jabatan`, `jabatan`, `no_hp`, `pendidikan_terakhir`, `masa_kerja`, `email`, `tgl_akhir`) VALUES
-('11111111', 'del', '$2y$10$3YotZ9dPo1ArrGn8HeCpEOPGHY3Gwh/3xvL7/b8PjOpFLUjWaUl66', 'dlw.jpeg', 'User', '2', '2', '2', '2', 2, '2', 2, '2', '0002-02-02'),
-('1212', 'anwar32c', '$2y$10$EnOa4P3xVTaiaCj2hy5l5.Z952fI29ECBfOv19NVH0vz3lz3BO5Ba', 'latar_merah.jpg', 'User', 'pns', '1', 'struktural', 'kepala', 211313433, 'si', 34, 'anwar@gmail.com', '2021-10-20'),
-('1234', 'ANWAR2', '$2y$10$qtkpLzpcI0pIe2PIox/FiuLi.13yYNQ/4KinxX6Kyu4K/2S5pgTmq', 'latar_merah1.jpg', 'User', 'pns', '1', 'admin', 'analis tenaga kerja', 0, 'sma', 0, '2324', '2021-03-10'),
-('1234512345', 'da', '$2y$10$dV7w3kK9ybwI7.7PGt.XI.7WYi5SK6MUzEJfB6wemZV9vz3/lDk2G', 'default.png', 'User', '', '', '', '', 0, '', 0, '', '0000-00-00'),
-('12345678', 'admin', '$2y$10$wTfzF3Adz747uapQCYYYBuzGyivbNnRmt0ZTlAlUAULsFAaTU7Qdu', 'default.png', 'Admin', '1', '1', '1', '1', 1, '1', 1, '1', '0001-01-01'),
-('1234567890', 'Laurin Madelau', '$2y$10$hs3g1GPeZO1SX.0FAZBRtOZCsLr2cGAUxLi024Il4ygUqEp6V26WW', 'Laurin_Madelau_20553010671.JPG', 'User', '2', 'KETUA PCR PELALAWAN', 'KETUA PCR PELALAWAN', 'KETUA PCR PELALAWAN', 31, '2', 2, '2', '2021-01-30'),
-('12345678900', 'delau', '$2y$10$9Q.mIVp9r6XE7WCvqlJowuCL/MVxuA2LNDPKoD47oLC9zoU5yFbcW', 'default.png', 'User', '', '', '', '', 0, '', 0, '', '0000-00-00'),
-('22222222', 'Jett', '$2y$10$Kx5edIx7cYauSn1wyX1D9eB1B.MmbcG9KgRH.obxkvoSqbCOhkcue', 'default.png', 'User', '', '', '', '', 0, '', 0, '', '0000-00-00'),
-('87654321', 'anwarjihad', '$2y$10$Yv3i2mMry.c7aDNt2bHdT.S14dy85RXUi4BEC2xruAJyWNjjM380C', 'latar_merah.jpg', 'User', 'pns', '1', 'analis', 'KELAPA', 0, 's1', 0, '2323', '2021-03-10');
+('11111111', 'aaa', '$2y$10$3YotZ9dPo1ArrGn8HeCpEOPGHY3Gwh/3xvL7/b8PjOpFLUjWaUl66', 'environtment.png', 'PPNPN', 'PNS', '2a', 'fungsional', 'a', 0, 'a', '2023-04-19', '2a', '0002-02-02'),
+('121', 'adas', '$2y$10$o6NKCZfjGXP.hTrQIv/1FumphrU5jZ7hg35zIgj2i/WJ98GsMHBhy', 'default.png', 'pns', '', '', '', '', 0, '', '', '', '0000-00-00'),
+('1212', 'anwar32c', '$2y$10$EnOa4P3xVTaiaCj2hy5l5.Z952fI29ECBfOv19NVH0vz3lz3BO5Ba', 'latar_merah.jpg', 'PNS', 'pns', '7', 'struktural', 'kepala', 211313433, 'si', '2022-04-28', 'anwar@gmail.com', '2021-04-06'),
+('1234', 'ANWAR2', '$2y$10$qtkpLzpcI0pIe2PIox/FiuLi.13yYNQ/4KinxX6Kyu4K/2S5pgTmq', 'latar_merah1.jpg', 'User', 'pns', '1', 'admin', 'analis tenaga kerja', 0, 'sma', '0', '2324', '2021-03-10'),
+('12345678', 'admin', '$2y$10$wTfzF3Adz747uapQCYYYBuzGyivbNnRmt0ZTlAlUAULsFAaTU7Qdu', 'default.png', 'Admin', '1', '1', '1', '1', 1, '1', '1', '1', '0001-01-01'),
+('1234567890', 'Laurin Madelau', '$2y$10$hs3g1GPeZO1SX.0FAZBRtOZCsLr2cGAUxLi024Il4ygUqEp6V26WW', 'Laurin_Madelau_20553010671.JPG', 'User', '2', 'KETUA PCR PELALAWAN', 'KETUA PCR PELALAWAN', 'KETUA PCR PELALAWAN', 31, '2', '2', '2', '2021-01-30'),
+('87654321', 'mhd anwar', '$2y$10$PJg8cZK5VAm7ZpQTLGvGse8b1g2IJB3Kkp.NUBjdzSu0TWgl77jGC', 'logo_red.png', 'PNS', '', 'A3', 'pelaksana', 'ssss', 232323, 'asa2', '2023-05-24', 'aa@gmail.com', '2023-05-10'),
+('987654321', 'agung', '$2y$10$RCrMmWWNQC7ORpDpVBaZZuVK2B2TKuw/s2uuOmqBuMCxzJUzFV1.G', 'photo_formal.jpg', 'PPNPN', '', '2a', 'struktural', 'kepala kasubag ', 2147483647, 'S1', '2021-05-19', 'AA@gmail.com', '2021-05-11');
 
 --
 -- Indexes for dumped tables
@@ -332,6 +393,12 @@ ALTER TABLE `detail_ilegal`
   ADD KEY `pendukung` (`id_pendukung`);
 
 --
+-- Indexes for table `kasus`
+--
+ALTER TABLE `kasus`
+  ADD PRIMARY KEY (`id_kasus`);
+
+--
 -- Indexes for table `pangkat`
 --
 ALTER TABLE `pangkat`
@@ -342,8 +409,13 @@ ALTER TABLE `pangkat`
 -- Indexes for table `pelaku`
 --
 ALTER TABLE `pelaku`
-  ADD PRIMARY KEY (`id_pelaku`),
-  ADD KEY `id_pendukung` (`id_pendukung`);
+  ADD PRIMARY KEY (`id_pelaku`);
+
+--
+-- Indexes for table `pkln`
+--
+ALTER TABLE `pkln`
+  ADD PRIMARY KEY (`id_pkln`);
 
 --
 -- Indexes for table `pmi`
@@ -363,6 +435,12 @@ ALTER TABLE `pmi_ilegal`
 --
 ALTER TABLE `pmi_pendukung`
   ADD PRIMARY KEY (`id_pendukung`);
+
+--
+-- Indexes for table `pmi_penempatan`
+--
+ALTER TABLE `pmi_penempatan`
+  ADD PRIMARY KEY (`id_penempatan`);
 
 --
 -- Indexes for table `surat_keluar`
@@ -392,49 +470,67 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `detail_ilegal`
 --
 ALTER TABLE `detail_ilegal`
-  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id_detail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+
+--
+-- AUTO_INCREMENT for table `kasus`
+--
+ALTER TABLE `kasus`
+  MODIFY `id_kasus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pangkat`
 --
 ALTER TABLE `pangkat`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `pelaku`
 --
 ALTER TABLE `pelaku`
-  MODIFY `id_pelaku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id_pelaku` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT for table `pkln`
+--
+ALTER TABLE `pkln`
+  MODIFY `id_pkln` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pmi`
 --
 ALTER TABLE `pmi`
-  MODIFY `id_pmi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pmi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pmi_ilegal`
 --
 ALTER TABLE `pmi_ilegal`
-  MODIFY `id_ilegal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_ilegal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `pmi_pendukung`
 --
 ALTER TABLE `pmi_pendukung`
-  MODIFY `id_pendukung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_pendukung` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `pmi_penempatan`
+--
+ALTER TABLE `pmi_penempatan`
+  MODIFY `id_penempatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `surat_keluar`
 --
 ALTER TABLE `surat_keluar`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `surat_masuk`
 --
 ALTER TABLE `surat_masuk`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -452,12 +548,6 @@ ALTER TABLE `detail_ilegal`
 --
 ALTER TABLE `pangkat`
   ADD CONSTRAINT `nip` FOREIGN KEY (`NIP`) REFERENCES `user` (`NIP`);
-
---
--- Constraints for table `pelaku`
---
-ALTER TABLE `pelaku`
-  ADD CONSTRAINT `pelaku_ibfk_1` FOREIGN KEY (`id_pendukung`) REFERENCES `pmi_pendukung` (`id_pendukung`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pmi_ilegal`
