@@ -46,6 +46,7 @@ class Ilegal_model extends CI_Model
         return $query->result_array();
 
     }
+   
     public function getById2($id)
     {
         $this->db->from($this->table);
@@ -65,7 +66,7 @@ class Ilegal_model extends CI_Model
     }
     public function update($where, $data)
     {
-        $this->db->update($this->table, $data, $where);
+        $this->db->update_batch($this->table, $data, $where);
         return $this->db->affected_rows();
     }
     public function insert($data)

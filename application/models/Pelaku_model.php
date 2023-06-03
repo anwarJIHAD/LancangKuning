@@ -45,7 +45,7 @@ class Pelaku_model extends CI_Model
         $this->db->select('d.*,pe.*');
         $this->db->from('detail_ilegal d');
         $this->db->join('pelaku pe', 'd.id_pelaku  = pe.id_pelaku', 'inner');
-        $this->db->where('d.id_pendukung', $id);
+        $this->db->where('d.no_korban', $id);
         $query = $this->db->get();
         $data = array();
         if ($query !== FALSE && $query->num_rows() > 0) {
@@ -83,8 +83,8 @@ class Pelaku_model extends CI_Model
     }
     public function insert($data)
     {
-        return $this->db->insert_batch('pelaku', $data);
-        // return $this->db->insert_id();
+         $this->db->insert_batch('pelaku', $data);
+        return $this->db->insert_id();
     }
     public function delete($id)
     {

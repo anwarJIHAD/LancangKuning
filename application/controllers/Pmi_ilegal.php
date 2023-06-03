@@ -31,11 +31,13 @@ class Pmi_ilegal extends CI_Controller
         $data['user'] = $this->db->get_where('user', ['NIP' => $this->session->userdata('NIP')])->row_array();
         // $data['detail'] = $this->Detail_Model->get();
         $data['pelaku'] = $this->Pelaku_model->pelaku_ilegal($id_p);
+        // var_dump($data['pelaku']);
+        // die;
         $data['pelaksana'] = $this->Pendukung_model->pmi_ilegal1($id_p);
         $data['pendukung'] = $this->Pendukung_model->getById2($id_p);
         $data['pmi'] = $this->Ilegal_model->getById2($id_p);
         $data['judul'] = "Halaman Detail Pelaku";
-     
+
         $this->load->view('layout/header', $data);
         $this->load->view("pelaku/vw_pelaku", $data);
         $this->load->view('layout/footer', $data);
@@ -71,12 +73,16 @@ class Pmi_ilegal extends CI_Controller
         $data['pendukung1'] = $this->Pendukung_model->get();
         $data['data'] = $this->Pendukung_model->get();
         $data['pelaksana'] = $this->Pendukung_model->pmi_ilegal1($id_p);
+        // var_dump($data['pelaksana']['kronologi_Pencegahan']);
+        // die;
         $data['pendukung'] = $this->Pendukung_model->getById2($data['pelaksana']['id_pendukung']);
-        $data['pelaku'] = $this->Pelaku_model->get();
+
+        $data['korban'] = $this->Ilegal_model->getById2($id_p);
+        $data['pelaku'] = $this->Pelaku_model->get_Pelaku1($id_p);
         $data['no_korban'] = $id_p;
 
-        $this->form_validation->set_rules('nama_pelaksana', 'nama_pelaksana', 'required', [
-            'required' => 'nama_pelaksana Wajib di isi'
+        $this->form_validation->set_rules('tgl_pelaksanaan', 'tgl_pelaksanaan', 'required', [
+            'required' => 'tgl_pelaksanaan Wajib di isi'
         ]);
 
 
@@ -86,15 +92,192 @@ class Pmi_ilegal extends CI_Controller
             $this->load->view("Pmi_ilegal/vw_editPendukung", $data);
             $this->load->view('layout/footer', $data);
         } else {
-            $data = [
-                'id_pendukung' => $this->input->post('nama_pelaksana'),
+            $pelaksana = (int) $this->input->post('nama_pelaksana');
+            $pelaku = $this->input->post('pelaku');
+            $kronologi = $this->input->post('kronologi');
+            $instansi = $this->input->post('instansi');
+            $tgl_pelaksanaan = $this->input->post('tgl_pelaksanaan');
+            $TKP = $this->input->post('TKP');
+            $lokasi_shelter = $this->input->post('lokasi_shelter');
+            $nama_korban = $this->input->post('nama_korban');
+            $daerah_asal_pmi = $this->input->post('daerah_asal_pmi');
+            $negara_tujuan = $this->input->post('negara_tujuan');
+            //hidden
+            $no_korban = $this->input->post('no_korban');
+            $no_korban1 = $this->input->post('no_korban1');
 
 
-            ];
-            $id = $this->input->post('id_pendukung');
-            $this->Detail_model->update(['id_pendukung' => $id], $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">data pendukung Berhasil di Ubah!</div>');
-            redirect('Pmi_ilegal/edit_cpmi/' . $id);
+
+
+
+
+            $data1 = array();
+
+            foreach ($pelaku as $key => $value) {
+                $data1[$key]['id_pendukung'] = $pelaksana;
+                $data1[$key]['id_pelaku'] = $value;
+                $data1[$key]['no_korban'] = $no_korban1;
+                $data1[$key]['kronologi_Pencegahan'] = $kronologi;
+                $data1[$key]['instansi_penindaklanjut'] = $instansi;
+                $data1[$key]['tgl_pelaksanaan'] = $tgl_pelaksanaan;
+                $data1[$key]['TKP'] = $TKP;
+                $data1[$key]['lokasi_shelter'] = $lokasi_shelter;
+            }
+
+            $data2 = array();
+            $korban1 = $this->Ilegal_model->getById2($id_p);
+
+
+            foreach ($daerah_asal_pmi as $key => $value) {
+                $data2[$key]['id_pendukung'] = $pelaksana;
+                $data2[$key]['nama'] = $nama_korban[$key];
+                $data2[$key]['daerah_asal_pmi'] = $value;
+                $data2[$key]['negara_tujuan'] = $negara_tujuan[$key];
+                $data2[$key]['no_korban'] = $no_korban1;
+                $data2[$key]['id_ilegal'] = (int) $korban1[$key]['id_ilegal'];
+
+            }
+
+
+            if ($this->db->update_batch('detail_ilegal', $data1, 'id_pelaku') && $this->db->update_batch('pmi_ilegal', $data2, 'id_ilegal')) {
+
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data PMI Berhasil DiEdit!</div>');
+                redirect('Pmi_ilegal');
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data PMI Gagal diEDIT!</div>');
+                redirect('Pmi_ilegal/edit/' . $id_p);
+            }
+        }
+    }
+
+    function tambahpelaku_baru($id_p)
+    {
+        $data['user'] = $this->db->get_where('user', ['NIP' => $this->session->userdata('NIP')])->row_array();
+
+        $data['judul'] = "Halaman Edit Data Pendukung";
+        $data['pendukung1'] = $this->Pendukung_model->get();
+        $data['data'] = $this->Pendukung_model->get();
+        $data['pelaksana'] = $this->Pendukung_model->pmi_ilegal1($id_p);
+        $data['pendukung'] = $this->Pendukung_model->getById2($data['pelaksana']['id_pendukung']);
+        $data['korban'] = $this->Ilegal_model->getById2($id_p);
+        $data['pelaku'] = $this->Pelaku_model->get_Pelaku1($id_p);
+        $data['no_korban'] = $id_p;
+        $this->form_validation->set_rules('nama_pelaku[]', 'nama_pelaku', 'required', [
+            'required' => 'nama_pelaku Wajib di isi'
+        ]);
+        $this->form_validation->set_rules('peran[]', 'peran', 'required', [
+            'required' => 'peran Wajib di isi'
+        ]);
+
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('layout/header', $data);
+            $this->load->view("Pmi_ilegal/vw_tambah_pelakuBaru", $data);
+            $this->load->view('layout/footer', $data);
+        } else {
+
+            $nama_pelaku = $this->input->post('nama_pelaku');
+            $peran = $this->input->post('peran');
+
+
+            $data2 = array();
+
+            foreach ($nama_pelaku as $key => $value) {
+                $data2[$key]['nama_pelaku'] = $value;
+                $data2[$key]['peran'] = $peran[$key];
+            }
+            $d = $this->input->post('no_korban');
+            $data1[$key]['kronologi_Pencegahan'] = $this->input->post('kronologi');
+            if ($this->Pelaku_model->insert($data2)) {
+                $lastId = $this->db->insert_id();
+                // var_dump($lastId);
+                // die;
+                $data1 = array();
+                foreach ($nama_pelaku as $key => $value) {
+                    $data1[$key]['kronologi_Pencegahan'] = $this->input->post('kronologi');
+                    $data1[$key]['no_korban'] = $this->input->post('no_korban');
+                    $data1[$key]['id_pelaku'] = (int) $lastId;
+                    $data1[$key]['id_pendukung'] = (int) $this->input->post('id_pendukung');
+                    $data1[$key]['instansi_penindaklanjut'] = $this->input->post('instansi_penindaklanjut');
+                    $data1[$key]['tgl_pelaksanaan'] = $this->input->post('tgl_pelaksanaan');
+                    $data1[$key]['TKP'] = $this->input->post('TKP');
+                    $data1[$key]['lokasi_shelter'] = $this->input->post('lokasi_shelter');
+                }
+
+
+
+
+
+
+                if ($this->Detail_model->insert($data1)) {
+
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data PMI Berhasil dibuat!</div>');
+                    redirect('Pmi_ilegal/edit/' . $id_p);
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data PMI Gagal dibuat!</div>');
+                    redirect('Pmi_ilegal/edit/' . $id_p);
+                }
+            }
+        }
+
+
+
+    }
+
+    function tambahKorban_baru($id_p)
+    {
+        $data['user'] = $this->db->get_where('user', ['NIP' => $this->session->userdata('NIP')])->row_array();
+
+        $data['judul'] = "Tambah Korban Baru";
+        $data['pendukung1'] = $this->Pendukung_model->get();
+        $data['data'] = $this->Pendukung_model->get();
+        $data['pelaksana'] = $this->Pendukung_model->pmi_ilegal1($id_p);
+        $data['pendukung'] = $this->Pendukung_model->getById2($data['pelaksana']['id_pendukung']);
+        $data['korban'] = $this->Ilegal_model->getById2($id_p);
+        $data['pelaku'] = $this->Pelaku_model->get_Pelaku1($id_p);
+        $data['no_korban'] = $id_p;
+
+        $this->form_validation->set_rules('nama_korban[]', 'nama_korban', 'required', [
+            'required' => 'nama_korban Wajib di isi'
+        ]);
+        $this->form_validation->set_rules('daerah_asal_pmi[]', 'daerah_asal_pmi', 'required', [
+            'required' => 'daerah_asal_pmi Wajib di isi'
+        ]);
+        $this->form_validation->set_rules('negara_tujuan[]', 'negara_tujuan', 'required', [
+            'required' => 'negara_tujuan Wajib di isi'
+        ]);
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('layout/header', $data);
+            $this->load->view("Pmi_ilegal/vw_tambah_korbanBaru", $data);
+            $this->load->view('layout/footer', $data);
+        } else {
+            $pelaksana = (int) $this->input->post('id_pendukung');
+            $nama_korban = $this->input->post('nama_korban');
+            $daerah_asal_pmi = $this->input->post('daerah_asal_pmi');
+            $negara_tujuan = $this->input->post('negara_tujuan');
+            $no_korban = $this->input->post('no_korban');
+            $data2 = array();
+
+            foreach ($daerah_asal_pmi as $key => $value) {
+                $data2[$key]['id_pendukung'] = $pelaksana;
+                $data2[$key]['nama'] = $nama_korban[$key];
+                $data2[$key]['daerah_asal_pmi'] = $value;
+                $data2[$key]['negara_tujuan'] = $negara_tujuan[$key];
+                $data2[$key]['no_korban'] = $no_korban;
+            }
+
+
+
+
+            if ($this->Ilegal_model->insert($data2)) {
+
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data PMI Berhasil dibuat!</div>');
+                redirect('Pmi_ilegal/edit/' . $id_p);
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data PMI Gagal dibuat!</div>');
+                redirect('Pmi_ilegal/edit/' . $id_p);
+            }
         }
     }
 
@@ -410,9 +593,9 @@ class Pmi_ilegal extends CI_Controller
     }
     function hapusSemua($id_k)
     {
-        $this->Ilegal_model->delete_($id_k);
+        $this->Ilegal_model->delete($id_k);
         $this->Detail_model->delete_($id_k);
-        $this->Pendukung_model->delete($id_k);
+
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Data Korban Berhasil Dihapus!</div>');
         redirect('Pmi_ilegal');
     }

@@ -83,7 +83,7 @@ class Detail_model extends CI_Model
     }
     public function update($where, $data)
     {
-        $this->db->update($this->table, $data, $where);
+        $this->db->update_batch($this->table, $data, $where);
         return $this->db->affected_rows();
     }
     public function insert($data)
@@ -99,7 +99,7 @@ class Detail_model extends CI_Model
     }
     public function delete_($id)
     {
-        $this->db->where('id_pendukung', $id);
+        $this->db->where('no_korban', $id);
         $this->db->delete($this->table);
         return $this->db->affected_rows();
     }
